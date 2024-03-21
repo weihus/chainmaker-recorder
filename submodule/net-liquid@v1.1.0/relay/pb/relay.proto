@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option go_package = "chainmaker.org/net-liquid/relay/pb";
+
+package relay;
+
+message RelayMsg {
+  enum Type {
+    HOP = 0;
+    STOP = 1;
+    STATUS = 2;
+  }
+
+  enum Status {
+    SUCCESS = 0;
+    HOP_SRC_ADDR_TOO_LONG = 1;
+    HOP_DST_ADDR_TOO_LONG = 2;
+    HOP_SRC_MULTIADDR_INVALID = 3;
+    HOP_DST_MULTIADDR_INVALID = 4;
+    HOP_NO_CONN_TO_DST = 5;
+    HOP_CANT_DIAL_DST = 6;
+    HOP_CANT_OPEN_DST_STREAM = 7;
+    HOP_CANT_SPEAK_RELAY = 8;
+    HOP_CANT_RELAY_TO_SELF = 9;
+    STOP_SRC_ADDR_TOO_LONG = 10;
+    STOP_DST_ADDR_TOO_LONG = 11;
+    STOP_SRC_MULTIADDR_INVALID = 12;
+    STOP_DST_MULTIADDR_INVALID = 13;
+    STOP_RELAY_REFUSED = 14;
+    MALFORMED_MESSAGE = 15;
+  }
+
+  message Peer {
+    bytes id = 1;
+    repeated bytes addrs = 2;
+  }
+
+  Type type = 1;
+  Peer srcPeer = 2;
+  Peer dstPeer = 3;
+  Status code = 4;
+}

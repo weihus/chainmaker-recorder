@@ -1,0 +1,36 @@
+chain_client:
+  # 链ID
+  chain_id: "chain1"
+
+  # 客户端用户交易签名私钥路径
+  user_sign_key_file_path: "./testdata/crypto-config/node1/admin/admin1/admin1.key"
+  # 客户端用户交易签名私钥密码(无密码则不需要设置)
+#  user_sign_key_pwd: "123"
+  # 签名使用的哈希算法，和节点保持一直
+  crypto:
+    hash: SHA256
+  auth_type: public
+  # 同步交易结果模式下，轮询获取交易结果时的最大轮询次数，删除此项或设为<=0则使用默认值 10
+  retry_limit: 20
+  # 同步交易结果模式下，每次轮询交易结果时的等待时间，单位：ms 删除此项或设为<=0则使用默认值 500
+  retry_interval: 500
+  # txid配置项：默认支持TimestampKey，如果开启enableNormalKey则使用NormalKey
+  enable_normal_key: false
+
+  nodes:
+    - # 节点地址，格式为：IP:端口:连接数
+      node_addr: "127.0.0.1:12301"
+      # 节点连接数
+      conn_cnt: 10
+
+  archive:
+    # 数据归档链外存储相关配置
+    type: "mysql"
+    dest: "root:123456:localhost:3306"
+    secret_key: xxx
+
+  rpc_client:
+    max_receive_message_size: 100 # grpc客户端接收消息时，允许单条message大小的最大值(MB)
+    max_send_message_size: 100 # grpc客户端发送消息时，允许单条message大小的最大值(MB)
+    send_tx_timeout: 60 # grpc 客户端发送交易超时时间
+    get_tx_timeout: 60 # rpc 客户端查询交易超时时间

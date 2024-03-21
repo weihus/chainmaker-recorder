@@ -1,0 +1,12 @@
+#stun server
+stunServer:
+  enabled: true
+  other_stun_server_addr: /ip4/127.0.0.1/udp/3681/quic
+  listen_addr1: /ip4/0.0.0.0/udp/3678/quic
+  listen_addr2: /ip4/0.0.0.0/udp/3679/quic
+  two_public_address: true
+  listen_addr3: /ip4/0.0.0.0/udp/3680/quic
+  listen_addr4: /ip4/0.0.0.0/udp/3681/quic
+  local_notify_addr: 127.0.0.1:8787
+  other_notify_addr: http://127.0.0.1:8788
+  network_type: udp
